@@ -1,0 +1,52 @@
+# ===========================================
+# Modoria Backend - Development Profile (Example)
+# ===========================================
+
+spring:
+  # H2 Database (In-Memory for Development)
+  datasource:
+    url: jdbc:h2:mem:modoria_dev;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # H2 Console
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: false
+
+  # JPA Settings for Dev
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  # Disable Vault in Development
+  cloud:
+    vault:
+      enabled: false
+
+  # Redis disabled for dev (use simple cache)
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+  # Use simple cache in dev
+  cache:
+    type: simple
+
+# Logging
+logging:
+  level:
+    com.modoria: DEBUG
+    org.springframework.web: DEBUG
+
+# AI disabled by default in dev (optional)
+modoria:
+  ai:
+    enabled: false
