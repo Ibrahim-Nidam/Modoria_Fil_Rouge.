@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="008-create-reviews-table" author="modoria">
+        <createTable tableName="reviews">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="comment" type="TEXT"/>
+            <column name="is_verified_purchase" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="is_approved" type="BOOLEAN" defaultValueBoolean="true"/>
+            <column name="helpful_count" type="INT" defaultValueNumeric="0"/>
+            <column name="not_helpful_count" type="INT" defaultValueNumeric="0"/>
+            <column name="admin_response" type="TEXT"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="version" type="BIGINT" defaultValueNumeric="0"/>
+        </createTable>
+
+        <addUniqueConstraint tableName="reviews" columnNames="user_id, product_id"/>
+
+        <createIndex indexName="idx_review_product" tableName="reviews">
+            <column name="product_id"/>
+        </createIndex>
+        <createIndex indexName="idx_review_rating" tableName="reviews">
+            <column name="rating"/>
+        </createIndex>
+
+        <addForeignKeyConstraint
+            baseTableName="reviews"
+            baseColumnNames="user_id"
+            constraintName="fk_review_user"
+            referencedTableName="users"
+            referencedColumnNames="id"
+            onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+            baseTableName="reviews"
+            baseColumnNames="product_id"
+            constraintName="fk_review_product"
+            referencedTableName="products"
+            referencedColumnNames="id"
+            onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

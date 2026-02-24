@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="028-create-notifications-table" author="antigravity">
+        <createTable tableName="notifications">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_notification_user" referencedTableName="users" referencedColumnNames="id"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_read" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="link_url" type="VARCHAR(500)"/>
+            <column name="metadata" type="TEXT"/>
+            
+            <!-- Audit Columns -->
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="version" type="BIGINT"/>
+        </createTable>
+
+        <createIndex indexName="idx_notification_user_id" tableName="notifications">
+            <column name="user_id"/>
+        </createIndex>
+        <createIndex indexName="idx_notification_is_read" tableName="notifications">
+            <column name="is_read"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

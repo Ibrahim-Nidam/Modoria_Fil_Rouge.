@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <!-- Add AI Support Enhancements to Chat System -->
+    <changeSet id="022-add-ai-support-fields" author="modoria-dev">
+        
+        <!-- Add support type and escalation fields to chat_rooms -->
+        <addColumn tableName="chat_rooms">
+            <column name="support_type" type="VARCHAR(20)" defaultValue="AI_ONLY">
+                <constraints nullable="false"/>
+            </column>
+            <column name="human_escalation_requested" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="escalation_reason" type="VARCHAR(500)"/>
+        </addColumn>
+
+        <!-- Add sender type and AI confidence to chat_messages -->
+        <addColumn tableName="chat_messages">
+            <column name="sender_type" type="VARCHAR(20)"/>
+            <column name="ai_confidence" type="DECIMAL(3,2)"/>
+        </addColumn>
+
+        <!-- Create indexes for better query performance -->
+        <createIndex tableName="chat_rooms" indexName="idx_chat_room_support_type">
+            <column name="support_type"/>
+        </createIndex>
+
+        <createIndex tableName="chat_rooms" indexName="idx_chat_room_escalation">
+            <column name="human_escalation_requested"/>
+        </createIndex>
+
+        <createIndex tableName="chat_messages" indexName="idx_chat_message_sender_type">
+            <column name="sender_type"/>
+        </createIndex>
+
+    </changeSet>
+
+</databaseChangeLog>

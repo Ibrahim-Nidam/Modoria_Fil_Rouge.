@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="010-seed-initial-data" author="modoria">
+        <!-- Insert default roles -->
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+            <column name="description" value="Administrator with full access"/>
+            <column name="is_default" valueBoolean="false"/>
+            <column name="is_active" valueBoolean="true"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_CUSTOMER"/>
+            <column name="description" value="Regular customer"/>
+            <column name="is_default" valueBoolean="true"/>
+            <column name="is_active" valueBoolean="true"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_SUPPORT"/>
+            <column name="description" value="Customer support agent"/>
+            <column name="is_default" valueBoolean="false"/>
+            <column name="is_active" valueBoolean="true"/>
+        </insert>
+
+        <!-- Insert default seasons -->
+        <insert tableName="seasons">
+            <column name="name" value="SPRING"/>
+            <column name="display_name" value="Spring"/>
+            <column name="start_month" valueNumeric="2"/>
+            <column name="end_month" valueNumeric="4"/>
+            <column name="theme_primary_color" value="#4CAF50"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+        </insert>
+        <insert tableName="seasons">
+            <column name="name" value="SUMMER"/>
+            <column name="display_name" value="Summer"/>
+            <column name="start_month" valueNumeric="5"/>
+            <column name="end_month" valueNumeric="7"/>
+            <column name="theme_primary_color" value="#FF9800"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="2"/>
+        </insert>
+        <insert tableName="seasons">
+            <column name="name" value="AUTUMN"/>
+            <column name="display_name" value="Autumn"/>
+            <column name="start_month" valueNumeric="8"/>
+            <column name="end_month" valueNumeric="10"/>
+            <column name="theme_primary_color" value="#795548"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="3"/>
+        </insert>
+        <insert tableName="seasons">
+            <column name="name" value="WINTER"/>
+            <column name="display_name" value="Winter"/>
+            <column name="start_month" valueNumeric="11"/>
+            <column name="end_month" valueNumeric="1"/>
+            <column name="theme_primary_color" value="#2196F3"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="4"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
