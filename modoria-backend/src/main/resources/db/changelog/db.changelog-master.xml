@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <include file="db/changelog/migrations/001-create-roles-table.xml"/>
+    <include file="db/changelog/migrations/002-create-seasons-table.xml"/>
+    <include file="db/changelog/migrations/003-create-users-table.xml"/>
+    <include file="db/changelog/migrations/004-create-categories-table.xml"/>
+    <include file="db/changelog/migrations/005-create-products-table.xml"/>
+    <include file="db/changelog/migrations/006-create-carts-table.xml"/>
+    <include file="db/changelog/migrations/007-create-orders-table.xml"/>
+    <include file="db/changelog/migrations/008-create-reviews-table.xml"/>
+    <include file="db/changelog/migrations/009-create-chat-tables.xml"/>
+    <include file="db/changelog/migrations/010-seed-initial-data.xml"/>
+    <include file="db/changelog/migrations/011-seed-admin-user.xml"/>
+    <include file="db/changelog/migrations/012-create-payments-shipping-tables.xml"/>
+    <include file="migrations/013-add-reset-token-to-users.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/014-create-product-variants.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/015-add-variant-id-to-cart-and-order.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/016-fix-variant-audit-columns.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/017-create-user-addresses.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/018-create-wishlist-items.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/019-create-coupons.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/022-add-ai-support-fields.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/023-make-chat-sender-nullable.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/024-add-audit-columns-to-chat.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/025-add-read-status-columns-to-chat.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/026-add-attachment-columns-to-chat.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/027-add-updated-at-to-chat-messages.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/028-create-notifications-table.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/029-add-pgvector-and-vector-store.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/030-update-product-pricing-fields.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
