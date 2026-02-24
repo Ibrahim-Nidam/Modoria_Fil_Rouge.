@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="030-update-product-pricing-fields" author="modoria">
+        <renameColumn tableName="products" oldColumnName="cost_price" newColumnName="purchase_price" columnDataType="DECIMAL(10,2)"/>
+        <addColumn tableName="products">
+            <column name="discount_percentage" type="DECIMAL(5,2)" defaultValueNumeric="0"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

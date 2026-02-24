@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="029-add-pgvector-extension" author="antigravity">
+        <sql>
+            CREATE EXTENSION IF NOT EXISTS vector;
+        </sql>
+    </changeSet>
+
+    <changeSet id="030-create-vector-store-table" author="antigravity">
+        <createTable tableName="vector_store">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="content" type="TEXT"/>
+            <column name="metadata" type="JSONB"/>
+            <column name="embedding" type="vector(768)"/> <!-- Matching Ollama mxbai-embed-large or similar -->
+        </createTable>
+        <sql>
+            CREATE INDEX idx_vector_store_embedding ON vector_store USING hnsw (embedding vector_cosine_ops);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="007-create-orders-table" author="modoria">
+        <createTable tableName="orders">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_number" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(20)" defaultValue="PENDING">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subtotal" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tax_amount" type="DECIMAL(10,2)" defaultValueNumeric="0"/>
+            <column name="shipping_amount" type="DECIMAL(10,2)" defaultValueNumeric="0"/>
+            <column name="discount_amount" type="DECIMAL(10,2)" defaultValueNumeric="0"/>
+            <column name="total_amount" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="VARCHAR(3)" defaultValue="MAD"/>
+            <column name="shipping_first_name" type="VARCHAR(100)"/>
+            <column name="shipping_last_name" type="VARCHAR(100)"/>
+            <column name="shipping_address_line1" type="VARCHAR(255)"/>
+            <column name="shipping_address_line2" type="VARCHAR(255)"/>
+            <column name="shipping_city" type="VARCHAR(100)"/>
+            <column name="shipping_state" type="VARCHAR(100)"/>
+            <column name="shipping_postal_code" type="VARCHAR(20)"/>
+            <column name="shipping_country" type="VARCHAR(100)"/>
+            <column name="shipping_phone" type="VARCHAR(20)"/>
+            <column name="payment_method" type="VARCHAR(50)"/>
+            <column name="payment_id" type="VARCHAR(255)"/>
+            <column name="payment_status" type="VARCHAR(50)"/>
+            <column name="paid_at" type="TIMESTAMP"/>
+            <column name="customer_notes" type="TEXT"/>
+            <column name="internal_notes" type="TEXT"/>
+            <column name="tracking_number" type="VARCHAR(100)"/>
+            <column name="shipped_at" type="TIMESTAMP"/>
+            <column name="delivered_at" type="TIMESTAMP"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="version" type="BIGINT" defaultValueNumeric="0"/>
+        </createTable>
+
+        <createIndex indexName="idx_order_number" tableName="orders">
+            <column name="order_number"/>
+        </createIndex>
+        <createIndex indexName="idx_order_status" tableName="orders">
+            <column name="status"/>
+        </createIndex>
+        <createIndex indexName="idx_order_user" tableName="orders">
+            <column name="user_id"/>
+        </createIndex>
+
+        <addForeignKeyConstraint
+            baseTableName="orders"
+            baseColumnNames="user_id"
+            constraintName="fk_order_user"
+            referencedTableName="users"
+            referencedColumnNames="id"/>
+
+        <createTable tableName="order_items">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_sku" type="VARCHAR(50)"/>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subtotal" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_image_url" type="VARCHAR(500)"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="version" type="BIGINT" defaultValueNumeric="0"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="order_items"
+            baseColumnNames="order_id"
+            constraintName="fk_order_item_order"
+            referencedTableName="orders"
+            referencedColumnNames="id"
+            onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+            baseTableName="order_items"
+            baseColumnNames="product_id"
+            constraintName="fk_order_item_product"
+            referencedTableName="products"
+            referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

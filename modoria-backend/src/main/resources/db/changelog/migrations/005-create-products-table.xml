@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="005-create-products-table" author="modoria">
+        <createTable tableName="products">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="sku" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="short_description" type="VARCHAR(500)"/>
+            <column name="price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="compare_at_price" type="DECIMAL(10,2)"/>
+            <column name="cost_price" type="DECIMAL(10,2)"/>
+            <column name="quantity" type="INT" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="low_stock_threshold" type="INT" defaultValueNumeric="10"/>
+            <column name="status" type="VARCHAR(20)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT"/>
+            <column name="weight" type="DOUBLE"/>
+            <column name="weight_unit" type="VARCHAR(10)" defaultValue="kg"/>
+            <column name="is_featured" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="is_new" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="is_on_sale" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="average_rating" type="DECIMAL(2,1)" defaultValueNumeric="0"/>
+            <column name="review_count" type="INT" defaultValueNumeric="0"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="version" type="BIGINT" defaultValueNumeric="0"/>
+        </createTable>
+
+        <createIndex indexName="idx_product_slug" tableName="products">
+            <column name="slug"/>
+        </createIndex>
+        <createIndex indexName="idx_product_sku" tableName="products">
+            <column name="sku"/>
+        </createIndex>
+        <createIndex indexName="idx_product_status" tableName="products">
+            <column name="status"/>
+        </createIndex>
+
+        <addForeignKeyConstraint
+            baseTableName="products"
+            baseColumnNames="category_id"
+            constraintName="fk_product_category"
+            referencedTableName="categories"
+            referencedColumnNames="id"
+            onDelete="SET NULL"/>
+
+        <!-- Product Images Table -->
+        <createTable tableName="product_images">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="alt_text" type="VARCHAR(255)"/>
+            <column name="is_primary" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="display_order" type="INT" defaultValueNumeric="0"/>
+            <column name="file_name" type="VARCHAR(255)"/>
+            <column name="file_size" type="BIGINT"/>
+            <column name="content_type" type="VARCHAR(100)"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="version" type="BIGINT" defaultValueNumeric="0"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="product_images"
+            baseColumnNames="product_id"
+            constraintName="fk_product_image_product"
+            referencedTableName="products"
+            referencedColumnNames="id"
+            onDelete="CASCADE"/>
+
+        <!-- Product Seasons Junction Table -->
+        <createTable tableName="product_seasons">
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="season_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="product_seasons" columnNames="product_id, season_id"/>
+
+        <addForeignKeyConstraint
+            baseTableName="product_seasons"
+            baseColumnNames="product_id"
+            constraintName="fk_product_seasons_product"
+            referencedTableName="products"
+            referencedColumnNames="id"
+            onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+            baseTableName="product_seasons"
+            baseColumnNames="season_id"
+            constraintName="fk_product_seasons_season"
+            referencedTableName="seasons"
+            referencedColumnNames="id"
+            onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

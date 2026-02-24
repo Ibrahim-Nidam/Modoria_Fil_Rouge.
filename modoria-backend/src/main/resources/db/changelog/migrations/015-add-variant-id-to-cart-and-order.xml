@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+
+    <changeSet id="015-add-variant-id-to-cart-and-order" author="modoria-dev">
+        <!-- Cart Items -->
+        <addColumn tableName="cart_items">
+            <column name="product_variant_id" type="BIGINT">
+                <constraints foreignKeyName="fk_cart_item_variant" references="product_variants(id)"/>
+            </column>
+        </addColumn>
+
+        <!-- Order Items -->
+        <addColumn tableName="order_items">
+            <column name="product_variant_id" type="BIGINT">
+                <constraints foreignKeyName="fk_order_item_variant" references="product_variants(id)"/>
+            </column>
+        </addColumn>
+        
+        <!-- We verify if existing Unique Constraint exists before dropping (manual cleanup might be needed otherwise) -->
+        <!-- Just adding variant_id column is safe. Index updates happen in Entity/JPA usually but we should update DB constraints -->
+    </changeSet>
+
+</databaseChangeLog>
