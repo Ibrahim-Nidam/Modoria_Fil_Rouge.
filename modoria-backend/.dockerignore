@@ -1,0 +1,36 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Environment variables
+.env
+.env.*
+
+# Logs and databases
+*.log
+*.sqlite
+vault_data/
+postgres_data/
+redis_data/
+ollama_data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Vault config (if local)
+vault/vault-keys.json
