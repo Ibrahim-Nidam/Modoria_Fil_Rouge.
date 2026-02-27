@@ -1,0 +1,307 @@
+/* =====================================================
+   MODORIA GLOBAL DESIGN SYSTEM
+   4 Seasons × 2 Modes = 8 Theme Permutations
+   Tailwind CSS v4 — CSS-first configuration
+   ===================================================== */
+
+@import "tailwindcss";
+
+/* =====================================================
+   1. TAILWIND v4 THEME EXTENSION
+   Maps CSS variables to Tailwind utilities
+   Usage: bg-primary, text-accent, border-muted, etc.
+   ===================================================== */
+
+@theme {
+    /* Semantic Colors */
+    --color-primary: var(--m-primary);
+    --color-primary-hover: var(--m-primary-hover);
+    --color-secondary: var(--m-secondary);
+    --color-accent: var(--m-accent);
+    --color-accent-hover: var(--m-accent-hover);
+
+    /* Surfaces */
+    --color-surface: var(--m-surface);
+    --color-surface-elevated: var(--m-surface-elevated);
+    --color-surface-overlay: var(--m-surface-overlay);
+    --color-background: var(--m-background);
+
+    /* Text */
+    --color-foreground: var(--m-foreground);
+    --color-foreground-muted: var(--m-foreground-muted);
+    --color-foreground-subtle: var(--m-foreground-subtle);
+    --color-foreground-inverse: var(--m-foreground-inverse);
+
+    /* Borders & Dividers */
+    --color-border: var(--m-border);
+    --color-border-strong: var(--m-border-strong);
+    --color-ring: var(--m-ring);
+
+    /* Feedback */
+    --color-success: var(--m-success);
+    --color-warning: var(--m-warning);
+    --color-danger: var(--m-danger);
+    --color-info: var(--m-info);
+
+    /* Shadows */
+    --shadow-sm: var(--m-shadow-sm);
+    --shadow-md: var(--m-shadow-md);
+    --shadow-lg: var(--m-shadow-lg);
+
+    /* Radii */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
+
+    /* Fonts */
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+
+/* =====================================================
+   2. DEFAULT TOKEN VALUES (Spring Light as base)
+   These are overridden by season/mode selectors below
+   ===================================================== */
+
+:root {
+    /* Primary Palette */
+    --m-primary: #4f8c5e;
+    --m-primary-hover: #3d7a4c;
+    --m-secondary: #7cb086;
+    --m-accent: #d4a843;
+    --m-accent-hover: #c49a35;
+
+    /* Surfaces */
+    --m-surface: #ffffff;
+    --m-surface-elevated: #f8faf8;
+    --m-surface-overlay: rgba(0, 0, 0, 0.5);
+    --m-background: #f0f4f1;
+
+    /* Typography */
+    --m-foreground: #1a2e1f;
+    --m-foreground-muted: #4a6b52;
+    --m-foreground-subtle: #8ba693;
+    --m-foreground-inverse: #ffffff;
+
+    /* Borders */
+    --m-border: #d4e0d7;
+    --m-border-strong: #a3bfaa;
+    --m-ring: #4f8c5e;
+
+    /* Feedback */
+    --m-success: #2d8a4e;
+    --m-warning: #d4a843;
+    --m-danger: #c44d4d;
+    --m-info: #4a90c4;
+
+    /* Shadows */
+    --m-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+    --m-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+    --m-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =====================================================
+   3. SEASONAL THEMES — LIGHT MODE
+   Switch by setting data-season on <html>
+   ===================================================== */
+
+/* --- SPRING LIGHT (default, defined in :root above) --- */
+
+/* --- SUMMER LIGHT --- */
+[data-season="summer"] {
+    --m-primary: #0e7c86;
+    --m-primary-hover: #0a6670;
+    --m-secondary: #38b2ac;
+    --m-accent: #f0a500;
+    --m-accent-hover: #d99400;
+
+    --m-surface: #ffffff;
+    --m-surface-elevated: #f0fafb;
+    --m-background: #e8f6f7;
+
+    --m-foreground: #0c2d30;
+    --m-foreground-muted: #2a6b70;
+    --m-foreground-subtle: #7aafb3;
+
+    --m-border: #c4e4e7;
+    --m-border-strong: #8cc9ce;
+    --m-ring: #0e7c86;
+}
+
+/* --- AUTUMN LIGHT --- */
+[data-season="autumn"] {
+    --m-primary: #b85c2f;
+    --m-primary-hover: #a04e27;
+    --m-secondary: #d4845a;
+    --m-accent: #8b6f3c;
+    --m-accent-hover: #755d30;
+
+    --m-surface: #ffffff;
+    --m-surface-elevated: #fdf8f3;
+    --m-background: #f5ede4;
+
+    --m-foreground: #2d1b0e;
+    --m-foreground-muted: #6b4a2e;
+    --m-foreground-subtle: #a88b6c;
+
+    --m-border: #e4d5c5;
+    --m-border-strong: #c9ad90;
+    --m-ring: #b85c2f;
+}
+
+/* --- WINTER LIGHT --- */
+[data-season="winter"] {
+    --m-primary: #3b5998;
+    --m-primary-hover: #304d85;
+    --m-secondary: #6b8cce;
+    --m-accent: #a0c4ff;
+    --m-accent-hover: #85b3f0;
+
+    --m-surface: #ffffff;
+    --m-surface-elevated: #f4f7fc;
+    --m-background: #eaeef6;
+
+    --m-foreground: #1a2340;
+    --m-foreground-muted: #4a5a80;
+    --m-foreground-subtle: #8a97b5;
+
+    --m-border: #d0d8e8;
+    --m-border-strong: #a8b5d0;
+    --m-ring: #3b5998;
+}
+
+
+/* =====================================================
+   4. DARK MODE OVERRIDES
+   Activated by data-mode="dark" on <html>
+   Works with ANY season
+   ===================================================== */
+
+[data-mode="dark"] {
+    --m-surface: #0f1114;
+    --m-surface-elevated: #1a1d22;
+    --m-surface-overlay: rgba(0, 0, 0, 0.7);
+    --m-background: #080a0c;
+
+    --m-foreground: #e8ecf0;
+    --m-foreground-muted: #9aa5b4;
+    --m-foreground-subtle: #5c6878;
+    --m-foreground-inverse: #0f1114;
+
+    --m-border: #2a2f38;
+    --m-border-strong: #3d4450;
+
+    --m-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --m-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --m-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* --- SPRING DARK --- */
+[data-season="spring"][data-mode="dark"],
+[data-mode="dark"][data-season="spring"] {
+    --m-primary: #6aad78;
+    --m-primary-hover: #7ec08c;
+    --m-accent: #e8bf5a;
+    --m-accent-hover: #f0cc70;
+    --m-secondary: #4a8a5a;
+    --m-ring: #6aad78;
+}
+
+/* --- SUMMER DARK --- */
+[data-season="summer"][data-mode="dark"],
+[data-mode="dark"][data-season="summer"] {
+    --m-primary: #2ab0bb;
+    --m-primary-hover: #40c4cf;
+    --m-accent: #f5b830;
+    --m-accent-hover: #fac848;
+    --m-secondary: #1a8a92;
+    --m-ring: #2ab0bb;
+}
+
+/* --- AUTUMN DARK --- */
+[data-season="autumn"][data-mode="dark"],
+[data-mode="dark"][data-season="autumn"] {
+    --m-primary: #d47a4a;
+    --m-primary-hover: #e08e60;
+    --m-accent: #a88550;
+    --m-accent-hover: #c09a62;
+    --m-secondary: #b06840;
+    --m-ring: #d47a4a;
+}
+
+/* --- WINTER DARK --- */
+[data-season="winter"][data-mode="dark"],
+[data-mode="dark"][data-season="winter"] {
+    --m-primary: #6b9de0;
+    --m-primary-hover: #80aee8;
+    --m-accent: #b0d4ff;
+    --m-accent-hover: #c4e0ff;
+    --m-secondary: #506fa0;
+    --m-ring: #6b9de0;
+}
+
+
+/* =====================================================
+   5. GLOBAL BASE STYLES
+   ===================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--m-background);
+    color: var(--m-foreground);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--m-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--m-primary-hover);
+}
+
+::selection {
+    background-color: var(--m-primary);
+    color: var(--m-foreground-inverse);
+}
+
+/* Focus ring for accessibility */
+:focus-visible {
+    outline: 2px solid var(--m-ring);
+    outline-offset: 2px;
+}
+
+
+/* =====================================================
+   6. UTILITY CLASSES
+   ===================================================== */
+
+/* Smooth theme transition for all themed elements */
+.theme-transition {
+    transition: background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}

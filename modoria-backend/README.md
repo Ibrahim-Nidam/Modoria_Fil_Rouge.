@@ -1,6 +1,6 @@
 # Modoria E-Commerce Backend
 
-A seasonal e-commerce platform backend built with Spring Boot 3.x and Java 25.
+A seasonal e-commerce platform backend built with Spring Boot 3.x and Java 21.
 
 ## Features
 
@@ -21,7 +21,7 @@ A seasonal e-commerce platform backend built with Spring Boot 3.x and Java 25.
 
 | Component | Technology |
 |-----------|------------|
-| Language | Java 25 LTS |
+| Language | Java 21 |
 | Framework | Spring Boot 3.4.1 |
 | Database | PostgreSQL / H2 (dev) |
 | Cache | Redis |
@@ -41,7 +41,7 @@ A seasonal e-commerce platform backend built with Spring Boot 3.x and Java 25.
 
 ### Prerequisites
 
-- Java 25+
+- Java 21
 - Maven 3.9+
 - Docker & Docker Compose
 
