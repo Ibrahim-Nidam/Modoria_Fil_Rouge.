@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,7 @@ public class NotificationServiceImpl implements NotificationService {
     private final UserRepository userRepository;
     private final SimpMessagingTemplate messagingTemplate;
 
+    @Async
     @Override
     public void sendNotification(User user, String title, String content, NotificationType type, String linkUrl,
             String metadata) {
@@ -51,12 +53,11 @@ public class NotificationServiceImpl implements NotificationService {
         log.info("Notification sent to user {}: {}", user.getEmail(), title);
     }
 
+    @Async
     @Override
     public void notifyRole(String roleName, String title, String content, NotificationType type, String linkUrl,
             String metadata) {
-        List<User> users = userRepository.findAll().stream()
-                .filter(u -> u.hasRole(roleName))
-                .toList();
+        List<User> users = userRepository.findByRoles_Name(roleName);
 
         for (User user : users) {
             sendNotification(user, title, content, type, linkUrl, metadata);
