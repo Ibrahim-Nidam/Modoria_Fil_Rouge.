@@ -1,0 +1,52 @@
+<div class="flex flex-col gap-5">
+
+    <!-- Header -->
+    <div class="flex flex-col gap-1">
+        <h1 class="font-heading text-2xl font-bold text-foreground tracking-tight">Create account</h1>
+        <p class="text-sm text-foreground-subtle">Join Modoria and discover seasonal collections</p>
+    </div>
+
+    <!-- Error Banner -->
+    @if (error$ | async; as error) {
+    <div class="flex items-center gap-2 px-4 py-3 rounded-lg text-sm text-danger bg-danger/10 border border-danger/30"
+        role="alert">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+        </svg>
+        <span>{{ error }}</span>
+    </div>
+    }
+
+    <!-- Form -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4" novalidate>
+
+        <!-- First / Last name row -->
+        <div class="grid grid-cols-2 gap-3">
+            <ui-input label="First name" placeholder="John" formControlName="firstName"
+                [errorMessage]="getError('firstName')" />
+            <ui-input label="Last name" placeholder="Doe" formControlName="lastName"
+                [errorMessage]="getError('lastName')" />
+        </div>
+
+        <ui-input label="Email address" type="email" placeholder="you@example.com" icon="mail" formControlName="email"
+            [errorMessage]="getError('email')" />
+
+        <ui-input label="Password" type="password" placeholder="At least 8 characters" icon="lock"
+            formControlName="password" [errorMessage]="getError('password')" />
+
+        <ui-input label="Confirm password" type="password" placeholder="Repeat your password" icon="lock"
+            formControlName="confirmPassword" [errorMessage]="getConfirmError()" />
+
+        <ui-button label="Create account" type="submit" variant="primary" size="lg" [fullWidth]="true"
+            [loading]="(loading$ | async) ?? false" />
+    </form>
+
+    <!-- Footer -->
+    <p class="text-center text-sm text-foreground-subtle">
+        Already have an account?
+        <a routerLink="/auth/login" class="text-primary font-semibold ml-1 hover:text-primary/80 transition-colors">Sign
+            in</a>
+    </p>
+
+</div>
