@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -27,11 +28,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "polyfills": [
+              "zone.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -64,7 +63,8 @@
               "buildTarget": "modoria-frontend:build:production"
             },
             "development": {
-              "buildTarget": "modoria-frontend:build:development"
+              "buildTarget": "modoria-frontend:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
