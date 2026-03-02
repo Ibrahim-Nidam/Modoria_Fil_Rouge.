@@ -1,0 +1,42 @@
+<div class="relative min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-background overflow-hidden">
+
+    <!-- Animated Background Orbs -->
+    <div class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+        <div
+            class="absolute -top-48 -left-36 w-[600px] h-[600px] rounded-full bg-primary opacity-35 blur-[80px] animate-[drift_18s_ease-in-out_infinite]">
+        </div>
+        <div
+            class="absolute -bottom-24 -right-24 w-[500px] h-[500px] rounded-full bg-accent opacity-35 blur-[80px] animate-[drift_18s_ease-in-out_infinite_-6s]">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-secondary opacity-20 blur-[80px] animate-[drift_18s_ease-in-out_infinite_-12s]">
+        </div>
+        <div class="absolute inset-0 opacity-30"
+            style="background-image: linear-gradient(var(--m-border) 1px, transparent 1px), linear-gradient(90deg, var(--m-border) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);">
+        </div>
+    </div>
+
+    <!-- Left: Branding Panel (hidden on mobile) -->
+    <aside class="relative z-10 hidden lg:flex items-center justify-center p-12">
+        <div class="max-w-sm flex flex-col gap-6">
+            <img src="/assets/logo/modoria-slogan-light.png" alt="Modoria"
+                class="h-14 w-auto object-contain drop-shadow-[0_0_20px_var(--m-primary)]" />
+            <p class="font-heading text-3xl font-bold text-foreground leading-snug">
+                Discover a world that changes with the seasons.
+            </p>
+            <div class="flex flex-col gap-2">
+                <span class="badge">✦ AI-Powered</span>
+                <span class="badge">✦ Seasonal Collections</span>
+                <span class="badge">✦ Real-time Chat</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Right: Form Panel — scrollable, card stays centered or flows naturally -->
+    <main class="auth-form-panel">
+        <div class="auth-card">
+            <router-outlet />
+        </div>
+    </main>
+
+</div>

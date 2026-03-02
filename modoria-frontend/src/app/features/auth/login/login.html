@@ -1,0 +1,57 @@
+<div class="flex flex-col gap-5">
+
+    <!-- Header -->
+    <div class="flex flex-col gap-1">
+        <h1 class="font-heading text-2xl font-bold text-foreground tracking-tight">Welcome back</h1>
+        <p class="text-sm text-foreground-subtle">Sign in to your Modoria account</p>
+    </div>
+
+    <!-- Error Banner -->
+    @if (error$ | async; as error) {
+    <div class="flex items-center gap-2 px-4 py-3 rounded-lg text-sm text-danger bg-danger/10 border border-danger/30"
+        role="alert">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+        </svg>
+        <span>{{ error }}</span>
+    </div>
+    }
+
+    <!-- Form -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4" novalidate>
+
+        <ui-input label="Email address" type="email" placeholder="you@example.com" icon="mail" formControlName="email"
+            [errorMessage]="getError('email')" />
+
+        <ui-input label="Password" type="password" placeholder="Your password" icon="lock" formControlName="password"
+            [errorMessage]="getError('password')" />
+
+        <!-- Forgot password -->
+        <div class="flex justify-end -mt-2">
+            <a routerLink="/auth/forgot-password"
+                class="text-xs text-foreground-subtle hover:text-primary transition-colors">
+                Forgot password?
+            </a>
+        </div>
+
+        <ui-button label="Sign in" type="submit" variant="primary" size="lg" [fullWidth]="true"
+            [loading]="(loading$ | async) ?? false" />
+    </form>
+
+    <!-- Divider -->
+    <div class="flex items-center gap-3">
+        <span class="flex-1 h-px bg-border"></span>
+        <span class="text-xs text-foreground-subtle">or</span>
+        <span class="flex-1 h-px bg-border"></span>
+    </div>
+
+    <!-- Footer -->
+    <p class="text-center text-sm text-foreground-subtle">
+        Don't have an account?
+        <a routerLink="/auth/register"
+            class="text-primary font-semibold ml-1 hover:text-primary/80 transition-colors">Create
+            one</a>
+    </p>
+
+</div>

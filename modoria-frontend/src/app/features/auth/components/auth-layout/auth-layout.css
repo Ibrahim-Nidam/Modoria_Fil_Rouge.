@@ -1,0 +1,65 @@
+/* Auth Layout — only things Tailwind can't do: keyframe animation + badge styles */
+
+:host {
+    display: block;
+    height: 100%;
+}
+
+@keyframes drift {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(40px, -30px) scale(1.05);
+    }
+
+    66% {
+        transform: translate(-30px, 20px) scale(0.95);
+    }
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--m-foreground-muted);
+    padding: 0.375rem 0.75rem;
+    background: var(--m-surface-elevated);
+    border: 1px solid var(--m-border);
+    border-radius: 9999px;
+    width: fit-content;
+    backdrop-filter: blur(8px);
+}
+
+/* --- Right Form Panel --- */
+.auth-form-panel {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: max(2rem, 5vh) 1rem 2rem 1rem;
+    overflow-y: auto;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: color-mix(in srgb, var(--m-surface) 90%, transparent);
+    border: 1px solid var(--m-border);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--m-shadow-lg), 0 0 0 1px color-mix(in srgb, var(--m-primary) 10%, transparent);
+}
+
+@media (max-width: 640px) {
+    .auth-card {
+        padding: 1.5rem;
+    }
+}
