@@ -1,0 +1,34 @@
+<footer class="bg-surface-elevated border-t border-border pt-12 pb-8 mt-auto">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="col-span-1 md:col-span-1 flex flex-col gap-4">
+            <img src="/assets/logo/modoria-slogan-light.png" alt="Modoria" class="h-8 w-max">
+            <p class="text-sm text-foreground-muted">Discover a world that changes with the seasons.</p>
+        </div>
+        <div class="flex flex-col gap-3">
+            <h4 class="font-heading font-semibold text-foreground">Shop</h4>
+            <a routerLink="/categories"
+                class="text-sm text-foreground-muted hover:text-primary transition-colors">Categories</a>
+            <a routerLink="/seasons" class="text-sm text-foreground-muted hover:text-primary transition-colors">Seasonal
+                Collections</a>
+            <a routerLink="/search"
+                class="text-sm text-foreground-muted hover:text-primary transition-colors">Search</a>
+        </div>
+        <div class="flex flex-col gap-3">
+            <h4 class="font-heading font-semibold text-foreground">Account</h4>
+            <a routerLink="/auth/login" class="text-sm text-foreground-muted hover:text-primary transition-colors">Sign
+                in</a>
+            <a routerLink="/auth/register"
+                class="text-sm text-foreground-muted hover:text-primary transition-colors">Create account</a>
+            <a routerLink="/orders" class="text-sm text-foreground-muted hover:text-primary transition-colors">My
+                Orders</a>
+        </div>
+        <div class="flex flex-col gap-3">
+            <h4 class="font-heading font-semibold text-foreground">Legal</h4>
+            <a href="#" class="text-sm text-foreground-muted hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="#" class="text-sm text-foreground-muted hover:text-primary transition-colors">Terms of Service</a>
+        </div>
+    </div>
+    <div class="container mx-auto px-4 border-t border-border pt-8 flex items-center justify-between">
+        <p class="text-sm text-foreground-subtle">&copy; {{ testYear() }} Modoria. All rights reserved.</p>
+    </div>
+</footer>
